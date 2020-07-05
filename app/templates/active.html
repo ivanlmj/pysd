@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ page_title }} {% endblock %}
+
+{% block style %}
+    #header {
+        background-color: green;
+    }
+{% endblock %}
+
+{% block header %}
+  <h1>Active</h1>
+{% endblock %}
+
+{% block content %}
+  <a id="back" href="/">Back</a>
+  <ul>
+    {% for service in data %}
+        {% for k, v in service.items() %}
+            <li>{{ k }} : {{ v }} </li>
+	{% endfor %}
+    {% endfor %}
+  </ul>
+{% endblock %}

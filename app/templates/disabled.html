@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ page_title }} {% endblock %}
+
+{% block style %}
+    #header {
+        background-color: grey;
+    }
+{% endblock %}
+
+{% block header %}
+  <h1>Disabled</h1>
+{% endblock %}
+
+{% block content %}
+  <a id="back" href="/">Back</a>
+  <ul>
+  {% for service in data %}
+      <li>{{ service }}</li>
+  {% endfor %}
+  </ul>
+{% endblock %}

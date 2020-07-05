@@ -1,0 +1,23 @@
+[Unit]
+Description=Panel for Systemd Services
+After=network.target
+
+
+[Service]
+User=pysd
+Group=pysd
+PermissionsStartOnly=true
+WorkingDirectory=/opt/pysd
+ExecStartPre=/bin/mkdir /run/pysd
+ExecStartPre=/bin/chown -R pysd:pysd /run/pysd
+ExecStart=/usr/local/bin/gunicorn app:app -b 127.0.0.1:8100 --env GUNICORN_SERVER="127.0.0.1:8000" --pid /run/pysd/pysd.pid --workers=2
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+ExecStopPost=/bin/rm -rf /run/pysd 
+PIDFile=/run/pysd/pysd.pid
+PrivateTmp=true
+
+
+[Install]
+WantedBy=multi-user.target
+Alias=pysd.service
